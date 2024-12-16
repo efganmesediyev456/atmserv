@@ -21,32 +21,28 @@ class SuperAdminSeeder extends Seeder
         $admin=User::create([
             "email"=>"admin@gmail.com",
             "password"=>Hash::make("password"),
-            "name"=>"admin",
-            'super'=>1
+            "name"=>"admin"
         ]);
 
          //user1
          User::create([
             "email"=>"user1@gmail.com",
             "password"=>Hash::make("password"),
-            "name"=>"user1",
-            'super'=>1
+            "name"=>"user1"
         ]);
 
         //user2
         User::create([
             "email"=>"user2@gmail.com",
             "password"=>Hash::make("password"),
-            "name"=>"user2",
-            'super'=>1
+            "name"=>"user2"
         ]);
 
         //user3
         User::create([
             "email"=>"user3@gmail.com",
             "password"=>Hash::make("password"),
-            "name"=>"user3",
-            'super'=>1
+            "name"=>"user3"
         ]);
 
 
