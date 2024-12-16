@@ -1,0 +1,609 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Documentation",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/account": {
+            "get": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Get all accounts",
+                "description": "List of all accounts",
+                "operationId": "9c3e3a19f5dee65a542defa8ca8dbb26",
+                "responses": {
+                    "200": {
+                        "description": "List of accounts",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "user_id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "balance": {
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": 150
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2024-06-01T12:00:00.000000Z"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2024-06-01T12:00:00.000000Z"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/account/store": {
+            "post": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "New account create",
+                "description": "New acount please add",
+                "operationId": "6e1674919e1caf396422185f0ef3bd68",
+                "requestBody": {
+                    "description": "Account",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "description": "İstifadəçi ID",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "balance": {
+                                        "description": "Başlanğıc balans",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 150
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Account is created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Account created successfully."
+                                        },
+                                        "account": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "user_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "balance": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 150
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-06-01T12:00:00.000000Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2024-06-01T12:00:00.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation errors"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/account/{id}/delete": {
+            "delete": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Delete an account",
+                "description": "Deletes an account by its ID",
+                "operationId": "2ee54c5cec6c367a8051bdbfe37f070b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Account ID to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "True if deletion succeeded, false otherwise",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "User login",
+                "operationId": "a3b306d14572d1f4bd6c064b3233e7b8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "admin@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "your-access-token-here"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/bank-notes": {
+            "get": {
+                "tags": [
+                    "Bank Notes"
+                ],
+                "summary": "Get all banknotes",
+                "description": "List of all banknotes",
+                "operationId": "4045f553150fc8bcee486e7cf8a5fc20",
+                "responses": {
+                    "200": {
+                        "description": "List of banknotes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "description": "Banknote ID",
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "description": "Banknote name",
+                                                "type": "string",
+                                                "example": "USD 100"
+                                            },
+                                            "price": {
+                                                "description": "Banknote value",
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": 100
+                                            },
+                                            "count": {
+                                                "type": "number",
+                                                "format": "integer",
+                                                "example": 100
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2024-06-01T12:00:00.000000Z"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2024-06-01T12:00:00.000000Z"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/bank-notes/store": {
+            "post": {
+                "tags": [
+                    "Bank Notes"
+                ],
+                "summary": "Create a new bank note",
+                "operationId": "6421e9d7265af74cc1078466145d95bf",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "count",
+                                    "price",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "count": {
+                                        "type": "integer",
+                                        "example": 10
+                                    },
+                                    "price": {
+                                        "type": "integer",
+                                        "example": 100
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "100 USD"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Bank note created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "count": {
+                                            "type": "integer",
+                                            "example": 10
+                                        },
+                                        "price": {
+                                            "type": "integer",
+                                            "example": 100
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "100 USD"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-12-15T10:00:00"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-12-15T10:00:00"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/bank-notes/{id}/delete": {
+            "delete": {
+                "tags": [
+                    "Bank Notes"
+                ],
+                "summary": "Delete an bank note",
+                "description": "Deletes an bank note by its ID",
+                "operationId": "7fb795667e836e977298988c26f45413",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Bank Note ID to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "True if deletion succeeded, false otherwise",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/transactions": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Get all transactions",
+                "description": "List of all transactions",
+                "operationId": "6581469356772e7a74a0d79897544f1a",
+                "responses": {
+                    "200": {
+                        "description": "List of transactions",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "username": {
+                                                "type": "string",
+                                                "example": "John"
+                                            },
+                                            "type": {
+                                                "type": "string",
+                                                "example": "system"
+                                            },
+                                            "denominations": {
+                                                "type": "string"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2024-06-01T12:00:00.000000Z"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2024-06-01T12:00:00.000000Z"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/transactions/{id}/delete": {
+            "delete": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Delete an transaction",
+                "description": "Deletes an transaction by its ID",
+                "operationId": "9f4a4639e37489f0a58dfe00c4cf7f5c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Transaction ID to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "True if deletion succeeded, false otherwise",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "description": "Enter token in format Bearer {token}",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Accounts",
+            "description": "Accounts"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
+        {
+            "name": "Bank Notes",
+            "description": "Bank Notes"
+        },
+        {
+            "name": "Transactions",
+            "description": "Transactions"
+        }
+    ]
+}
