@@ -30,7 +30,7 @@ class BankNoteController extends Controller
      *             type="array",
      *             @OA\Items(
      *                 @OA\Property(property="id", type="integer", example=1, description="Banknote ID"),
-     *                 @OA\Property(property="name", type="string", example="USD 100", description="Banknote name"),
+     *                 @OA\Property(property="name", type="string", example="AZN 100", description="Banknote name"),
      *                 @OA\Property(property="price", type="number", format="float", example=100.00, description="Banknote value"),
      *                 @OA\Property(property="count", type="number", format="integer", example=100),
      *                 @OA\Property(property="created_at", type="string", format="date-time", example="2024-06-01T12:00:00.000000Z"),
@@ -64,7 +64,7 @@ class BankNoteController extends Controller
      *             required={"count", "price", "name"},
      *             @OA\Property(property="count", type="integer", example=10),
      *             @OA\Property(property="price", type="integer", example=100),
-     *             @OA\Property(property="name", type="string", example="100 USD")
+     *             @OA\Property(property="name", type="string", example="100 AZN")
      *         )
      *     ),
      *     @OA\Response(
@@ -74,7 +74,7 @@ class BankNoteController extends Controller
      *             @OA\Property(property="id", type="integer", example=1),
      *             @OA\Property(property="count", type="integer", example=10),
      *             @OA\Property(property="price", type="integer", example=100),
-     *             @OA\Property(property="name", type="string", example="100 USD"),
+     *             @OA\Property(property="name", type="string", example="100 AZN"),
      *             @OA\Property(property="created_at", type="string", format="date-time", example="2024-12-15T10:00:00"),
      *             @OA\Property(property="updated_at", type="string", format="date-time", example="2024-12-15T10:00:00")
      *         )

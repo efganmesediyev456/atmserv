@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class SuperAdminSeeder extends Seeder
 {
@@ -15,17 +16,9 @@ class SuperAdminSeeder extends Seeder
      */
     public function run()
     {
-        //super admin
-        User::create([
-            "email"=>"superadmin@gmail.com",
-            "password"=>Hash::make("password"),
-            "name"=>"super admin",
-            'super'=>1
-        ]);
 
-
-        //super admin
-        User::create([
+        //admin
+        $admin=User::create([
             "email"=>"admin@gmail.com",
             "password"=>Hash::make("password"),
             "name"=>"admin",
@@ -55,5 +48,14 @@ class SuperAdminSeeder extends Seeder
             "name"=>"user3",
             'super'=>1
         ]);
+
+
+        //role
+        Role::create([
+            "name"=>"admin",
+            "guard_name"=>"web"
+        ]);
+
+        $admin->assignRole("admin");
     }
 }
